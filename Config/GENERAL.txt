@@ -8,7 +8,7 @@ CONFIG_PACKAGE_luci-app-ssr-plus=n
 CONFIG_PACKAGE_luci-app-openclash=y
 
 # passwall编译
-# CONFIG_PACKAGE_luci-app-passwall=y
+CONFIG_PACKAGE_luci-app-passwall=y
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Geoview=y
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Haproxy=y
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Hysteria=y
@@ -68,14 +68,14 @@ CONFIG_PACKAGE_luci-app-vlmcsd=y  #kms
 # CONFIG_PACKAGE_luci-app-mosdns=y
 # CONFIG_PACKAGE_luci-app-smartdns=y
 # CONFIG_PACKAGE_luci-app-vnt=y
-CONFIG_PACKAGE_luci-app-easytier=y
-# CONFIG_PACKAGE_luci-app-zerotier=y
+# CONFIG_PACKAGE_luci-app-easytier=y
+CONFIG_PACKAGE_luci-app-zerotier=y
 # CONFIG_PACKAGE_luci-app-tailscale-community=y
-# CONFIG_PACKAGE_luci-app-openlist2=y
+CONFIG_PACKAGE_luci-app-openlist2=y
 CONFIG_PACKAGE_luci-app-socat=y
 CONFIG_PACKAGE_luci-app-upnp=y
 CONFIG_PACKAGE_luci-app-firewall=y
-# CONFIG_PACKAGE_luci-app-wolplus=y  #网络唤醒
+CONFIG_PACKAGE_luci-app-wolplus=y  #网络唤醒
 # CONFIG_PACKAGE_luci-app-authshield=y
 
 CONFIG_PACKAGE_luci-app-watchdog=y  #看门狗
@@ -92,12 +92,10 @@ CONFIG_PACKAGE_luci-app-adbyby-plus=n
 CONFIG_PACKAGE_luci-app-attendedsysupgrade=n
 
 #网络分享
-CONFIG_PACKAGE_autosamba=n
-CONFIG_PACKAGE_samba36-server=n
-CONFIG_PACKAGE_luci-app-samba=n
-CONFIG_PACKAGE_luci-app-samba4=n
-CONFIG_PACKAGE_luci-app-vsftpd=n  #FTP服务器
-CONFIG_PACKAGE_luci-app-cifs-mount=n #挂载 SMB 网络共享
+CONFIG_PACKAGE_autosamba=y
+CONFIG_PACKAGE_luci-app-samba4=y
+CONFIG_PACKAGE_luci-app-vsftpd=y #FTP服务器
+CONFIG_PACKAGE_luci-app-cifs-mount=y #挂载 SMB 网络共享
 CONFIG_PACKAGE_autoksmbd=n
 CONFIG_PACKAGE_luci-app-ksmbd=n
 
@@ -137,6 +135,7 @@ CONFIG_PACKAGE_mmc-utils=y
 # CONFIG_PACKAGE_kmod-usb-acm is not set
 # CONFIG_PACKAGE_kmod-usb-ohci is not set
 # CONFIG_PACKAGE_kmod-usb-uhci is not set
+
 
 
 

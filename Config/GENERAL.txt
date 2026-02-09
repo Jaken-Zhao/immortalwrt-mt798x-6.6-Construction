@@ -85,9 +85,6 @@ CONFIG_PACKAGE_luci-app-wireguard=y
 CONFIG_PACKAGE_luci-proto-wireguard=y
 CONFIG_PACKAGE_wireguard-tools=y
 
-# istore商店
-CONFIG_PACKAGE_luci-app-store=y
-
 #网络分享
 CONFIG_PACKAGE_autosamba=n
 CONFIG_PACKAGE_luci-app-samba4=n
@@ -104,6 +101,9 @@ CONFIG_PACKAGE_luci-app-argon-config=y
 CONFIG_PACKAGE_luci-theme-aurora=y
 CONFIG_PACKAGE_luci-app-aurora-config=y
 CONFIG_PACKAGE_luci-theme-bootstrap=n
+
+# istore商店
+CONFIG_PACKAGE_luci-app-store=y
 
 # --- [必需] 文件系统支持 ---
 CONFIG_PACKAGE_kmod-fs-ext4=y
@@ -142,4 +142,3 @@ CONFIG_PACKAGE_luci-app-accesscontrol=n
 CONFIG_PACKAGE_luci-app-uugamebooster=n
 CONFIG_PACKAGE_luci-app-adbyby-plus=n
 CONFIG_PACKAGE_luci-app-attendedsysupgrade=n
-

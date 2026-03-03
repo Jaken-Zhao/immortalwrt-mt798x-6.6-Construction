@@ -77,14 +77,41 @@ if [ -f "$TS_FILE" ]; then
 fi
 
 #修复Rust编译失败
-RUST_FILE=$(find ../feeds/packages/ -maxdepth 3 -type f -wholename "*/rust/Makefile")
-if [ -f "$RUST_FILE" ]; then
-	echo " "
+# 1. 配置区域
+PKGS_REPO="https://github.com/openwrt/packages.git"
+PKGS_BRANCH="openwrt-23.05"
+RUST_OFFICIAL_URL="https://static.rust-lang.org/dist"
 
-	sed -i 's/ci-llvm=true/ci-llvm=false/g' $RUST_FILE
+OPENWRT_ROOT=$(pwd)
+RUST_DIR="$OPENWRT_ROOT/feeds/packages/lang/rust"
+RUST_MK="$RUST_DIR/Makefile"
+DL_DIR="$OPENWRT_ROOT/dl"
 
-	cd $PKG_PATH && echo "rust has been fixed!"
-fi
+# ==========================================
+# 第一步：物理清空与底座对齐
+# ==========================================
+echo ">>> [1/5] 清空当前 Rust 环境并同步官方 $PKGS_BRANCH ..."
+# 物理删除旧包、编译残余、以及 OpenWrt 编译状态戳记
+rm -rf "$RUST_DIR"
+rm -rf "$OPENWRT_ROOT/build_dir/host/rustc-*"
+rm -rf "$OPENWRT_ROOT/build_dir/target-*/host/rustc-*"
+rm -rf "$OPENWRT_ROOT/staging_dir/host/stamp/.rust_installed"
+
+# 克隆指定分支的定义
+TEMP_REPO="/tmp/rust_sync_$$"
+git clone --depth=1 -b "$PKGS_BRANCH" "$PKGS_REPO" "$TEMP_REPO" 2>/dev/null
+mkdir -p "$RUST_DIR"
+cp -r "$TEMP_REPO/lang/rust/"* "$RUST_DIR/"
+rm -rf "$TEMP_REPO"
+echo "✅ 成功锁定 $PKGS_BRANCH 版本的 Makefile 和 Patches。"
+
+# 索引刷新 (强制重连血脉)
+echo ">>> [4/6] 强制刷新全系统索引..."
+rm -rf tmp
+# 物理删除旧链接，强迫重新生成
+find package/feeds -name "rust" -type l -exec rm -f {} \;
+./scripts/feeds update -i
+./scripts/feeds install -a -f
 
 #修复DiskMan编译失败
 DM_FILE="./luci-app-diskman/applications/luci-app-diskman/Makefile"
